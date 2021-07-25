@@ -1,3 +1,6 @@
+github.com/ayush723/users-api_bookstore/app v0.0.0-20210724025117-713ef5b08a43 h1:oUCrFfcL/53pDX8nZulFmlWu914UfM/akf5zCpkRRCU=
+github.com/ayush723/users-api_bookstore/app v0.0.0-20210724025117-713ef5b08a43/go.mod h1:mEcm4sKSuYWXzXVOEVfFExPEaQIbZT+ydI7qbKRYOsY=
+github.com/ayush723/users-api_bookstore/controllers v0.0.0-20210724024738-fa4809427821/go.mod h1:OhJvEQk7Tv/3kO1TdJU8973XoRytYB1362umBUhO5Pw=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
