@@ -7,14 +7,14 @@ import (
 )
 
 var (
-	usersDB *sql.DB
+	UsersDB *sql.DB
 )
 
 func init() {
 	datasourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8", "ayush", "envy", "127.0.0.1", "users_db")
 
 	var err error
-	usersDB, err = sql.Open("postgres", datasourceName)
+	UsersDB, err = sql.Open("postgres", datasourceName)
 	if err != nil {
 
 		panic(err)
