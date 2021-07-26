@@ -2,8 +2,10 @@ package users
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/ayush723/users-api_bookstore/utils/errors"
+	"github.com/federicoleon/bookstore_users-api/utils/date_utils"
 )
 
 //only has access to database
@@ -35,6 +37,8 @@ func (user *User) Save() *errors.RestErr{
 		}
 		return errors.NewBadRequestError(fmt.Sprintf("user %d already exists",user.Id))
 	}
+	now := time.Now().UTC()
+	user.DateCreated = date_utils.GetNowString()
 	usersDB[user.Id] = user
 	return nil
 }
