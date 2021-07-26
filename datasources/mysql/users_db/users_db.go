@@ -7,19 +7,19 @@ import (
 )
 
 var (
-	UsersDB *sql.DB
+	Client *sql.DB
 )
 
 func init() {
 	datasourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8", "ayush", "envy", "127.0.0.1", "users_db")
 
 	var err error
-	UsersDB, err = sql.Open("postgres", datasourceName)
+	Client, err = sql.Open("postgres", datasourceName)
 	if err != nil {
 
 		panic(err)
 	}
-	if err = usersDB.Ping();err !=nil {
+	if err = Client.Ping();err !=nil {
 		panic(err)
 	}
 	log.Panicln("database successfully configured")
