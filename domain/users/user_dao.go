@@ -17,7 +17,7 @@ var (
 //dao = data access object
 
 func (user *User) Get() *errors.RestErr {
-	if err = users_db.Client.Ping();err !=nil {
+	if err := users_db.Client.Ping(); err != nil {
 		panic(err)
 	}
 	result := usersDB[user.Id]
