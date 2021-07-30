@@ -6,6 +6,10 @@ import (
 	"github.com/ayush723/users-api_bookstore/utils/errors"
 )
 
+const (
+	StatusActive = "active"
+)
+
 //data transfer object
 type User struct {
 	Id          int64  `json:"id"`
@@ -13,6 +17,8 @@ type User struct {
 	LastName    string `json:"last_name"`
 	Email       string `json:"email"`
 	DateCreated string `json:"date_created"`
+	Status      string `json:"status"`
+	Password    string `json:"password"` //it is internal field
 }
 
 func (user *User) Validate() *errors.RestErr {
@@ -21,6 +27,11 @@ func (user *User) Validate() *errors.RestErr {
 	user.Email = strings.TrimSpace(strings.ToLower(user.Email))
 	if user.Email == "" {
 		return errors.NewBadRequestError("invalid email address")
+	}
+
+	user.Password = strings.TrimSpace(user.Password)
+	if user.Password == ""{
+		return errors.NewBadRequestError("invalid password")
 	}
 	return nil
 }
