@@ -20,6 +20,7 @@ type User struct {
 	Status      string `json:"status"`
 	Password    string `json:"password"` //it is internal field
 }
+type Users []User
 
 func (user *User) Validate() *errors.RestErr {
 	user.FirstName = strings.TrimSpace(strings.ToLower(user.FirstName))
@@ -30,7 +31,7 @@ func (user *User) Validate() *errors.RestErr {
 	}
 
 	user.Password = strings.TrimSpace(user.Password)
-	if user.Password == ""{
+	if user.Password == "" {
 		return errors.NewBadRequestError("invalid password")
 	}
 	return nil

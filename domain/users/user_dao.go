@@ -11,11 +11,11 @@ import (
 
 const (
 	// indexUniqueEmail = "users.email_UNIQUE"
-	ErrorNoRows     = "no rows in result set"
-	queryInsertUser = "INSERT INTO users(first_name, last_name, email, date_created, status, password) VALUES(?,?,?,?,?,?);"
-	queryGetUser    = "SELECT id, first_name, last_name,email,date_created, status FROM users WHERE id =?;"
-	queryUpdateuser = "UPDATE users SET first_name=?,last_name=?, email=? WHERE id =?;"
-	queryDeleteUser = "DELETE FROM users WHERE id=?;"
+	ErrorNoRows           = "no rows in result set"
+	queryInsertUser       = "INSERT INTO users(first_name, last_name, email, date_created, status, password) VALUES(?,?,?,?,?,?);"
+	queryGetUser          = "SELECT id, first_name, last_name,email,date_created, status FROM users WHERE id =?;"
+	queryUpdateuser       = "UPDATE users SET first_name=?,last_name=?, email=? WHERE id =?;"
+	queryDeleteUser       = "DELETE FROM users WHERE id=?;"
 	queryFindUserByStatus = "SELECT id, first_name, last_name, email, date_created, status FROM users WHERE status = ?;"
 )
 
@@ -85,30 +85,30 @@ func (user *User) Delete() *errors.RestErr {
 
 }
 
-func (user *User) FindByStatus(status string)([]User, *errors.RestErr){
+func (user *User) FindByStatus(status string) ([]User, *errors.RestErr) {
 	stmt, err := users_db.Client.Prepare(queryFindUserByStatus)
-	if err != nil{
+	if err != nil {
 		return nil, errors.NewInternalServerError(err.Error())
 	}
 	defer stmt.Close()
 
 	rows, err := stmt.Query(status)
-	if err != nil{
+	if err != nil {
 		return nil, errors.NewInternalServerError(err.Error())
 	}
 	defer rows.Close() // we use it after we have a vald result in rows
 
-	results := make ([]User, 0)
-	for rows.Next(){
+	results := make([]User, 0)
+	for rows.Next() {
 		var user User
-		if err:= rows.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Email, &user.DateCreated, &user.Status);err != nil{
+		if err := rows.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Email, &user.DateCreated, &user.Status); err != nil {
 			return nil, mysql_utils.ParseError(err)
 		}
 		results = append(results, user)
 	}
-	if len(results) == 0{
-		return nil, errors.NewNotFoundError(fmt.Sprintf("no users matching status %s",status))
+	if len(results) == 0 {
+		return nil, errors.NewNotFoundError(fmt.Sprintf("no users matching status %s", status))
 	}
-	return results,nil
+	return results, nil
 
 }
