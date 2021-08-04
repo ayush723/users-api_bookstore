@@ -23,6 +23,7 @@ func getUserId(userIdParam string) (int64, *errors.RestErr) {
 	}
 	return userId, nil
 }
+//Create is a handler to create new user
 func Create(c *gin.Context) {
 	var user users.User
 	if err := c.ShouldBindJSON(&user); err != nil {
@@ -39,6 +40,7 @@ func Create(c *gin.Context) {
 	c.JSON(http.StatusCreated, result.Marshall(c.GetHeader("X-public") == "true"))
 }
 
+//Get is a handler to get existing user
 func Get(c *gin.Context) {
 
 	userId, idErr := getUserId(c.Param("user-id"))
@@ -53,6 +55,8 @@ func Get(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, user.Marshall(c.GetHeader("X-public") == "true"))
 }
+
+//Update is a handler to update existing user
 func Update(c *gin.Context) {
 
 	userId, idErr := getUserId(c.Param("user-id"))
@@ -80,6 +84,7 @@ func Update(c *gin.Context) {
 
 }
 
+//Delete is a handler to delete any user
 func Delete(c *gin.Context) {
 	userId, idErr := getUserId(c.Param("user-id"))
 	if idErr != nil {
@@ -92,6 +97,8 @@ func Delete(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, map[string]string{"status": "deleted"})
 }
+
+//Search is a handler to search user 
 func Search(c *gin.Context) {
 	status := c.Query("status")
 
@@ -103,3 +110,18 @@ func Search(c *gin.Context) {
 
 	c.JSON(http.StatusOK, users.Marshall(c.GetHeader("X-public") == "true"))
 }
+
+func Login(c *gin.Context){
+	var request users.LoginRequest
+	if err := c.ShouldBindJSON(&request) ; err != nil{
+		restErr := errors.NewBadRequestError("invalid json body")
+		c.JSON(http.StatusBadRequest, restErr)
+		return
+	}
+	user, err := services.UsersService.LoginUser(request)
+	if err!= nil{
+		c.JSON(err.Status, err)
+		return 
+	}
+	c.JSON(http.StatusOK, user.Marshall(c.GetHeader("X-public") == "true"))
+	}

@@ -1,9 +1,10 @@
 package services
 
 var (
-	ItemsService itemsService = itemsService{}
+	ItemsService itemsServiceInterface = &itemsService{}
 )
 
+//itemsServiceInterface includes all methods that can be called only on items
 type itemsServiceInterface interface {
 	GetItem()
 	SaveItem()
