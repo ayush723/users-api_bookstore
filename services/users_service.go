@@ -91,7 +91,7 @@ func (s *usersService) SearchUser(status string) (users.Users, *errors.RestErr) 
 	return dao.FindByStatus(status)
 }
 
-func ( s * usersService) LoginUser(request users.LoginRequest)(*users.User, *errors.RestErr){
+func (s * usersService) LoginUser(request users.LoginRequest)(*users.User, *errors.RestErr){
 	dao := &users.User{
 		Email: request.Email,
 		Password: crypto_utils.GetMd5(request.Password),
