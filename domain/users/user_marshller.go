@@ -18,6 +18,7 @@ type PrivateUser struct {
 	Status      string `json:"status"`
 }
 
+//Marshall 
 func (users Users) Marshall(isPublic bool) []interface{} {
 	result := make([]interface{}, len(users))
 	for index, user := range users {
@@ -27,6 +28,8 @@ func (users Users) Marshall(isPublic bool) []interface{} {
 	return result
 }
 
+//Marshall takes a bool if a user is private or public and returns a public or private user accordingly
+//if true returns public user
 func (user *User) Marshall(isPublic bool) interface{} {
 	if isPublic {
 
