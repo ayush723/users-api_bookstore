@@ -4,11 +4,15 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/ayush723/oauth-go_bookstore/oauth"
 	"github.com/ayush723/users-api_bookstore/utils/errors"
+
+	// "github.com/federicoleon/bookstore_oauth-go/oauth"
 
 	"github.com/ayush723/users-api_bookstore/domain/users"
 	"github.com/ayush723/users-api_bookstore/services"
 	"github.com/gin-gonic/gin"
+	// "guthub.com/ayush723/oauth-go_bookstore/oauth"
 )
 
 func TestServiceInterface() {
@@ -42,6 +46,11 @@ func Create(c *gin.Context) {
 
 //Get is a handler to get existing user
 func Get(c *gin.Context) {
+	if err := oauth.AuthenticateRequest(c.Request); err != nil{
+		c.JSON(err.Status, err)
+		return
+	}
+
 
 	userId, idErr := getUserId(c.Param("user-id"))
 	if idErr != nil {
@@ -53,7 +62,12 @@ func Get(c *gin.Context) {
 		c.JSON(getErr.Status, getErr)
 		return
 	}
-	c.JSON(http.StatusOK, user.Marshall(c.GetHeader("X-public") == "true"))
+
+	if oauth.GetCallerId(c.Request) == user.Id{
+		c.JSON(http.StatusOK, user.Marshall(false))
+		return
+	}
+	c.JSON(http.StatusOK, user.Marshall(oauth.IsPublic(c.Request)))
 }
 
 //Update is a handler to update existing user
