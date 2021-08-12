@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/ayush723/users-api_bookstore/datasources/mysql/users_db"
-	"github.com/ayush723/users-api_bookstore/logger"
+	"github.com/ayush723/utils-go_bookstore/logger"
 
 	"github.com/ayush723/users-api_bookstore/utils/mysql_utils"
 	"github.com/ayush723/utils-go_bookstore/rest_errors"
