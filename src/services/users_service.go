@@ -1,11 +1,11 @@
 package services
 
 import (
-	"github.com/ayush723/users-api_bookstore/utils/crypto_utils"
-	"github.com/ayush723/users-api_bookstore/utils/date_utils"
+	"github.com/ayush723/users-api_bookstore/src/utils/crypto_utils"
+	"github.com/ayush723/users-api_bookstore/src/utils/date_utils"
 	"github.com/ayush723/utils-go_bookstore/rest_errors"
 
-	"github.com/ayush723/users-api_bookstore/domain/users"
+	"github.com/ayush723/users-api_bookstore/src/domain/users"
 )
 
 var (

@@ -7,8 +7,8 @@ import (
 	"github.com/ayush723/oauth-go_bookstore/oauth"
 	"github.com/ayush723/utils-go_bookstore/rest_errors"
 
-	"github.com/ayush723/users-api_bookstore/domain/users"
-	"github.com/ayush723/users-api_bookstore/services"
+	"github.com/ayush723/users-api_bookstore/src/domain/users"
+	"github.com/ayush723/users-api_bookstore/src/services"
 	"github.com/gin-gonic/gin"
 )
 
