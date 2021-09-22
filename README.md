@@ -1,2 +1,3 @@
 # users-api_bookstore
-Users Api
+
+This is the users api with MySQL as the database and Gin Gonic as http router in Domain Driven Development mode. I have also containerized using Docker.
