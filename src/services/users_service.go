@@ -17,6 +17,7 @@ var (
 //usersService struct implements all methods on users.
 type usersService struct {
 }
+
 //usersServiceInterface includes all methods that can be called only on users
 //its basically groupig methods for a specific datatype
 type usersServiceInterface interface {
@@ -26,8 +27,8 @@ type usersServiceInterface interface {
 	UpdateUser(bool, users.User) (*users.User, rest_errors.RestErr)
 	DeleteUser(int64) rest_errors.RestErr
 	SearchUser(string) (users.Users, rest_errors.RestErr)
-	LoginUser(users.LoginRequest)(*users.User, rest_errors.RestErr)
-		}
+	LoginUser(users.LoginRequest) (*users.User, rest_errors.RestErr)
+}
 
 //GetUser takes a user id from parameter and returns a user
 func (s *usersService) GetUser(userId int64) (*users.User, rest_errors.RestErr) {
@@ -48,7 +49,7 @@ func (s *usersService) CreateUser(user users.User) (*users.User, rest_errors.Res
 		return nil, err
 	}
 	return &user, nil
-	//we never return both. only one at time
+
 }
 
 func (s *usersService) UpdateUser(isPartial bool, user users.User) (*users.User, rest_errors.RestErr) {
@@ -93,12 +94,12 @@ func (s *usersService) SearchUser(status string) (users.Users, rest_errors.RestE
 	return dao.FindByStatus(status)
 }
 
-func (s * usersService) LoginUser(request users.LoginRequest)(*users.User, rest_errors.RestErr){
+func (s *usersService) LoginUser(request users.LoginRequest) (*users.User, rest_errors.RestErr) {
 	dao := &users.User{
-		Email: request.Email,
+		Email:    request.Email,
 		Password: crypto_utils.GetMd5(request.Password),
 	}
-	if err :=  dao.FindByEmailAndPassword(); err != nil{
+	if err := dao.FindByEmailAndPassword(); err != nil {
 		return nil, err
 	}
 	return dao, nil
