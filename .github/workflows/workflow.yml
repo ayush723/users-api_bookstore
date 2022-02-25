@@ -16,7 +16,7 @@ jobs:
   test-env:
     runs-on: ubuntu-latest
     env: 
-      TEST_KEY: ${{secrets.SECRET}}
+      TEST_KEY: ${{secrets.SECRETs}}
     steps:
       - name: See if value is passed or not
         run: echo $TEST_KEY 
