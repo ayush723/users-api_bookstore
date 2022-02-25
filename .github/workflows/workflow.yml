@@ -1,0 +1,22 @@
+name: CI
+
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test-env:
+    runs-on: ubuntu-latest
+    env: 
+      TEST_KEY: ${{secrets.SECRET}}
+    steps:
+      - name: See if value is passed or not
+        run: echo $TEST_KEY 
