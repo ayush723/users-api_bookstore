@@ -16,8 +16,13 @@ jobs:
   test-env:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Source
+        uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
       - name: See if value is passed or not
         run: |
+          ls .github/workflows
           source ./.github/workflows/test.base64
           echo $TEST_KEY
           echo $TEST_KEY | base64 -di > application_default_credentials.json
