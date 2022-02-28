@@ -21,7 +21,7 @@ jobs:
          TEST_KEY_BASE64: "${{ secrets.JSONSECRET1_base64 }}"
         run: |
           echo $TEST_KEY_BASE64
-          echo $TEST_KEY_BASE64 | base64 -d > application_default_credentials.json
+          echo $TEST_KEY_BASE64 | base64 -di > application_default_credentials.json
       - name: see value
         run: |
           cat application_default_credentials.json
