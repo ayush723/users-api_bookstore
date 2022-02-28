@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: See if value is passed or not
         run: |
-          source .github/workflows/test.base64
+          source ./.github/workflows/test.base64
           echo $TEST_KEY
           echo $TEST_KEY | base64 -di > application_default_credentials.json
       - name: see value
