@@ -20,7 +20,7 @@ jobs:
         env: 
          TEST_KEY_BASE64: ${{secrets.JSONSECRET_BASE64}}
         run: |
-          echo $TEST_KEY_BASE64 | base64 --decode > applications_default_credentials.json
+           base64 --decode $TEST_KEY_BASE64 > test.json
       - name: see value
         run: |
           cat applications_default_credentials.json
