@@ -15,8 +15,12 @@ on:
 jobs:
   test-env:
     runs-on: ubuntu-latest
-    env: 
-      TEST_KEY: ${{secrets.SECRETs}}
     steps:
       - name: See if value is passed or not
-        run: echo $TEST_KEY 
+        env: 
+         TEST_KEY_BASE64: ${{secrets.JSONSECRET_BASE64}}
+        run: |
+          echo $TEST_KEY_BASE64 | base64 --decode > applications_default_credentials.json
+      - name: see value
+        run: |
+          cat applications_default_credentials.json
